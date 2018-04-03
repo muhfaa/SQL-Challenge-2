@@ -1,0 +1,50 @@
+FastFood Inc Daily Data Tabulation,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+Staff Performance Table,,,,,,,,,,,,,
+EmployeeID*,StaffName,Age,Birthdate,PhoneNumber,City,PostalCode,BaseSalary,Position,WorkHour,OrderServed1,OrderServed2,OrderServed3,
+5552121,Fina Juia,22,11-04-1995,222-111-000,NYC,2323,3.4,Waiter,8,Pizza,Pizza,Burger,
+5552122,Buya Tuim,23,12-05-1994,222-111-222,NJ,2121,3.4,Waiter,10,Burger,Soda,Pizza,
+5552123,Yaya Roli,24,25-07-1993,222-111-333,NYC,2323,3.4,Waiter,5,Burger,Soda,Soda,
+5552124,Ceci Mila,25,9-10-1992,222-111-888,NJ,2121,3.4,Waiter,6,Pizza,Pizza,Pizza,
+9993401,Nui Juy,33,23-9-1984,222-111-211,NYC,2323,7.8,Manager,8,NULL,NULL,NULL,
+4443321,Kio Rew,23,30-04-1994,222-111-121,NJ,2121,3.2,CleaningService,10,NULL,NULL,NULL,
+4443322,Jia Jun,22,2-2-1995,222-111-133,NJ,2121,3.2,CleaningService,10,NULL,NULL,NULL,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+What do you think the normalized table looks like? Show the result after every step of normalization,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+tabel data staff,,,,,,,,tabel_cities,,,,,
+EmployeeID*,StaffName,Age,Birthdate,PhoneNumber,,,,id_city*,City,Postalcode,,tabel_order,
+5552121,Fina Juia,22,11-04-1995,222-111-000,,,,C1,NYC,2323,,EmployeeID*,id_item**
+5552122,Buya Tuim,23,12-05-1994,222-111-222,,,,C2,NJ,2121,,5552121,1
+5552123,Yaya Roli,24,25-07-1993,222-111-333,,,,,,,,5552121,1
+5552124,Ceci Mila,25,9-10-1992,222-111-888,,,,tabel_salary,,,,5552121,2
+9993401,Nui Juy,33,23-9-1984,222-111-211,,,,id_salary*,Position,BaseSalary,,5552122,2
+4443321,Kio Rew,23,30-04-1994,222-111-121,,,,p1,Waiter,3.4,,5552122,3
+4443322,Jia Jun,22,2-2-1995,222-111-133,,,,p2,Manager,7.8,,5552122,1
+,,,,,,,,p3,CleaningService,3.2,,5552123,2
+,,,,,,,,,,,,5552123,3
+,,,,,,,,tabel_work,,,,5552123,3
+,,,,,,,,EmployeeID*,id_work,WorkHour,,5552124,1
+,,,,,,,,5552121,w1,8,,5552124,1
+,,,,,,,,5552122,w2,10,,5552124,1
+,,,,,,,,5552123,w3,5,,,
+,,,,,,,,5552124,w4,6,,tabel_position,
+,,,,,,,,9993401,w5,8,,EmployeeID*,id_salary**
+,,,,,,,,4443321,w6,10,,5552121,p1
+,,,,,,,,4443322,w7,10,,5552122,p1
+,,,,,,,,,,,,5552123,p1
+,,,,,,,,,,,,5552124,p1
+,,,,,,,,tabel_items,,,,9993401,p2
+,,,,,,,,id_item*,Item,,,4443321,p3
+,,,,,,,,1,pizza,,,4443322,p3
+,,,,,,,,2,burger,,,,
+,,,,,,,,3,soda,,,tabel_address,
+,,,,,,,,,,,,EmployeeID*,id_city**
+,,,,,,,,,,,,5552121,C1
+,,,,,,,,,,,,5552122,C2
+,,,,,,,,,,,,5552123,C1
+,,,,,,,,,,,,5552124,C2
+,,,,,,,,,,,,9993401,C1
+,,,,,,,,,,,,4443321,C2
+,,,,,,,,,,,,4443322,C2
